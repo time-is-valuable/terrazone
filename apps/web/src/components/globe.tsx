@@ -3,6 +3,7 @@
 import createGlobe, { type Marker } from 'cobe';
 import { useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
+import { getEmployees, IEmployee } from "~/appwrite/employeesAPIFunc";
 
 export const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,6 +11,32 @@ export const Globe = () => {
   const pointerInteractionMovement = useRef(0);
   const locationToAngles = (lat:number, long:number) => {
     return [Math.PI - ((long * Math.PI) / 180 - Math.PI / 2), (lat * Math.PI) / 180]
+  }
+
+  function renderEmployees(){
+    const members = getEmployees()
+
+    if(!members || !members.length){
+        return;
+    }
+    // -90 to 90 for latitude and -180 to 180 for longitude.
+  
+    const memberList = members.map((member:IEmployee)=>{
+        const ranLat = Math.round(Math.random() * (90-(-90)) + (-90));
+        const ranLon = Math.round(Math.random() * (180-(-180)) + (-180));
+  
+        return(
+            <button key={member.employee_name} className="text-white" onClick = {()=>focusRef.current = locationToAngles(ranLat, ranLon)}>
+                {member.employee_name}
+            </button>
+        )
+    });
+  
+    return(
+        <section>
+            {memberList}
+        </section>
+    )
   }
 
   const [{ r }, api] = useSpring(() => ({
@@ -123,6 +150,7 @@ export const Globe = () => {
           }
         }}
       />
+      {renderEmployees()}
     </div>
   );
 };

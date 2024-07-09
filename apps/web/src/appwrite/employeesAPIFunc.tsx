@@ -8,7 +8,7 @@ export interface IEmployee {
     location: string
 }
 
-export async function getEmployees(){
+export function getEmployees(){
     try{
         // const data = await database.listDocuments(
         //     '<DATABASE_ID>',
