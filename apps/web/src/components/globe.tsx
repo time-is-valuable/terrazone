@@ -8,6 +8,9 @@ export const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef<null | number>(null);
   const pointerInteractionMovement = useRef(0);
+  const locationToAngles = (lat:number, long:number) => {
+    return [Math.PI - ((long * Math.PI) / 180 - Math.PI / 2), (lat * Math.PI) / 180]
+  }
 
   const [{ r }, api] = useSpring(() => ({
     r: 0,
@@ -20,14 +23,19 @@ export const Globe = () => {
   }));
 
   const markers: Marker[] = [
-    { location: [37.7595, -122.4367], size: 0.3 },
+    { location: [37.7595, -122.4367], size: 0.3},
     { location: [40.7128, -74.006], size: 0.1 },
     { location: [20.7128, -74.006], size: 0.1 },
     { location: [35.2100, 129.0689], size: 0.1 },
   ];
 
+  const focusRef = useRef([0, 0]);
+
   useEffect(() => {
     let width = 0;
+    let currentPhi = 0;
+    let currentTheta = 0;
+    const doublePi = Math.PI * 2;
     const onResize = () =>
       canvasRef.current && (width = canvasRef.current.offsetWidth);
     window.addEventListener('resize', onResize);
@@ -44,7 +52,7 @@ export const Globe = () => {
       phi: 0,
       theta: 0,
       dark: 1,
-      diffuse: 1.2,
+      diffuse: 5.7,
       mapSamples: 16000,
       mapBrightness: 6,
       baseColor: [1,1,3.4],
@@ -52,9 +60,22 @@ export const Globe = () => {
       glowColor: [1, 1, 1],
       markers,
       onRender: (state) => {
-        state.phi = r.get();
-        state.width = width * 2;
-        state.height = width * 2;
+        state.phi = currentPhi
+        state.theta = currentTheta
+
+        const [focusPhi, focusTheta] = focusRef.current
+        const distPositive = (focusPhi - currentPhi + doublePi) % doublePi;
+        const distNegative = (currentPhi - focusPhi + doublePi) % doublePi;
+
+         // Control the speed
+         if (distPositive < distNegative) {
+          currentPhi += distPositive * 0.08
+        } else {
+          currentPhi -= distNegative * 0.08
+        }
+        currentTheta = currentTheta * 0.92 + focusTheta * 0.08
+        state.width = width * 2
+        state.height = width * 2
       },
     });
 
@@ -69,7 +90,7 @@ export const Globe = () => {
     <div className="block">
       <canvas
         ref={canvasRef}
-        className="w-[400px] h-[400px] max-w-full aspect-[1]"
+        className="w-[600px] h-[600px] max-w-full aspect-[1]"
         onPointerDown={(e) => {
           pointerInteracting.current =
             e.clientX - pointerInteractionMovement.current;
