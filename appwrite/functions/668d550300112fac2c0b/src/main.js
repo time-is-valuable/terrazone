@@ -1,16 +1,8 @@
-import {Client, Databases, Permission, Query, Role} from 'node-appwrite';
-
-const databaseId = 'terrazone';
-const collectionId = 'employees';
-const teamsId = 'employees';
+import {Permission, Query, Role} from 'node-appwrite';
+import AppwriteClient from "./shared/appwriteClient.js";
 
 export default async ({ req, res, log, error }) => {
-    const client = new Client()
-        .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
-        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-        .setKey(req.headers['x-appwrite-key']);
-
-    const databases = new Databases(client);
+    AppwriteClient.setClient(req)
 
     // Allowing all origins, as the function is for logged-in users only.
     const headers = { 'Access-Control-Allow-Origin': '*' };
@@ -18,7 +10,7 @@ export default async ({ req, res, log, error }) => {
     const userId = req.headers['x-appwrite-user-id'];
 
     try {
-        const docs = await databases.listDocuments(databaseId, collectionId, [
+        const docs = await AppwriteClient.getDatabases().listDocuments(AppwriteClient.databaseId, AppwriteClient.collectionId, [
             Query.equal('employee_id', userId)
         ]);
 
@@ -36,7 +28,7 @@ export default async ({ req, res, log, error }) => {
             permissions.push(Permission.read(Role.any()));
         }
 
-        await databases.updateDocument(databaseId, collectionId, document.$id, undefined, permissions);
+        await AppwriteClient.getDatabases().updateDocument(AppwriteClient.databaseId, AppwriteClient.collectionId, document.$id, undefined, permissions);
 
         return res.json({ success: true }, 200, headers)
     } catch (e) {
