@@ -20,8 +20,10 @@ export const Globe = () => {
   }));
 
   const markers: Marker[] = [
-    { location: [37.7595, -122.4367], size: 0.03 },
+    { location: [37.7595, -122.4367], size: 0.3 },
     { location: [40.7128, -74.006], size: 0.1 },
+    { location: [20.7128, -74.006], size: 0.1 },
+    { location: [35.2100, 129.0689], size: 0.1 },
   ];
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export const Globe = () => {
       diffuse: 1.2,
       mapSamples: 16000,
       mapBrightness: 6,
-      baseColor: [0.3, 0.3, 0.3],
+      baseColor: [1,1,3.4],
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
       markers,
@@ -64,10 +66,10 @@ export const Globe = () => {
   }, []);
 
   return (
-    <>
+    <div className="block">
       <canvas
         ref={canvasRef}
-        className="w-[600px] h-[600px] max-w-full aspect-[1]"
+        className="w-[400px] h-[400px] max-w-full aspect-[1]"
         onPointerDown={(e) => {
           pointerInteracting.current =
             e.clientX - pointerInteractionMovement.current;
@@ -100,6 +102,6 @@ export const Globe = () => {
           }
         }}
       />
-    </>
+    </div>
   );
 };
