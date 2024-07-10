@@ -12,7 +12,7 @@ export async function registerUser({
   try {
     await account.create(ID.unique(), email, password, name);
 
-    loginUser({ email: email, password: password });
+    await loginUser({ email: email, password: password });
   } catch (err) {
     console.error(err);
   }
