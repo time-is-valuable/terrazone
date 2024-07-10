@@ -1,7 +1,8 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import type { Config } from 'tailwindcss';
 
-const config: Omit<Config, 'content'> = {
+const config: Config = {
+  content: [],
   theme: {
     extend: {
       animation: {
@@ -16,6 +17,16 @@ const config: Omit<Config, 'content'> = {
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        brand: {
+          DEFAULT: '#1D1D21',
+        },
+      },
+      borderColor: {
+        brand: {
+          DEFAULT: '#2D2D31',
+        },
       },
     },
   },

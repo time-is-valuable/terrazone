@@ -1,12 +1,8 @@
 import { create } from 'zustand';
-
-type User = {
-  name: string | null;
-  email: string | null;
-} | null;
+import { type User } from '~/appwrite/mock-employees';
 
 type UserState = {
-  activeUser: User;
+  activeUser: User | null;
   setActiveUser: (job: User) => void;
 };
 

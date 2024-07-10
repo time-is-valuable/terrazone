@@ -13,13 +13,13 @@ import { useUserStore } from '~/state/user-store';
 
 export const Header = () => {
   const { setActiveUser } = useUserStore();
-  const { localTime, timeZone } = useLocalTime();
+  const { localTime, timezone } = useLocalTime();
 
   return (
     <header className="p-4 flex w-full justify-between">
       <section className="p-4 flex flex-col align-start w-full">
         <h2 className="text-white opacity-50 text-lg">
-          Your local time ({timeZone})
+          Your local time ({timezone})
         </h2>
 
         <div className="flex">
@@ -33,7 +33,23 @@ export const Header = () => {
       <button
         className="text-white"
         onClick={() =>
-          setActiveUser({ email: 'jesse@appwrite.io', name: 'Jesse Winton' })
+          setActiveUser({
+            employee_id: 'aaa',
+            employee_name: 'Jesse Winton',
+            location: 'USA',
+            timezone: 'America/New_York',
+            title: 'Design Engineer',
+            workHours: '9:00am — 5:00pm',
+            times: {
+              saturday: { isWorking: false, from: '00:00', to: '23:30' },
+              sunday: { isWorking: false, from: '00:00', to: '23:30' },
+              monday: { isWorking: true, from: '09:00', to: '17:00' },
+              tuesday: { isWorking: true, from: '09:00', to: '17:00' },
+              wednesday: { isWorking: true, from: '09:00', to: '17:00' },
+              thursday: { isWorking: true, from: '09:00', to: '17:00' },
+              friday: { isWorking: true, from: '09:00', to: '14:00' },
+            },
+          })
         }
       >
         Activate

@@ -20,7 +20,7 @@ const DropdownTrigger = forwardRef(
       <DropdownPrimitive.Trigger
         className={classNames(
           'flex items-center justify-between min-w-60 w-full py-1.5 px-3 cursor-pointer rounded-lg',
-          'text-neutral-400 border-[#2D2D31] border-solid border bg-[#1D1D21] hover:bg-[#1D1D21]/90 transition-all focus:ring-neutral-700/30',
+          'text-neutral-400 border-brand border-solid border bg-brand hover:bg-brand/90 transition-all focus:ring-neutral-700/30',
           className
         )}
         ref={ref}
