@@ -16,9 +16,12 @@ export default async ({ req, res, log, error }) => {
     try {
         const buffer = await fetch(`https://unavatar.io/${user.email}`)
         const response = await AppwriteClient.getStorage().createFile(
-             AppwriteClient.bucketsId,
+            AppwriteClient.bucketsId,
             ID.unique(),
             InputFile.fromBuffer(Buffer.from((await buffer.arrayBuffer())), `${user.$id}.jpg`),
+            [
+                Permission.update(Role.user(user.$id)),
+            ]
         );
 
         photoId = response.$id;
@@ -30,8 +33,8 @@ export default async ({ req, res, log, error }) => {
     try {
         await AppwriteClient.getDatabases().createDocument(AppwriteClient.databaseId, AppwriteClient.collectionId, ID.unique(), {
             times: '{}',
-            employee_id: user.$id,
-            employee_name: user.name,
+            id: user.$id,
+            name: user.name,
             timezone: defaultTimezone,
             location: '',
             photo_id: photoId
