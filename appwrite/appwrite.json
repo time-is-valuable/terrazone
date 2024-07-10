@@ -60,7 +60,7 @@
                     "default": "{}"
                 },
                 {
-                    "key": "employee_name",
+                    "key": "name",
                     "type": "string",
                     "required": false,
                     "array": false,
@@ -68,7 +68,7 @@
                     "default": null
                 },
                 {
-                    "key": "employee_id",
+                    "key": "id",
                     "type": "string",
                     "required": false,
                     "array": false,
@@ -223,7 +223,7 @@
             "$permissions": [
                 "read(\"any\")"
             ],
-            "fileSecurity": false,
+            "fileSecurity": true,
             "name": "Profiles",
             "enabled": true,
             "maximumFileSize": 30000000,

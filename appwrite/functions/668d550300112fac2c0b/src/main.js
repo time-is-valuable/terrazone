@@ -11,7 +11,7 @@ export default async ({ req, res, log, error }) => {
 
     try {
         const docs = await AppwriteClient.getDatabases().listDocuments(AppwriteClient.databaseId, AppwriteClient.collectionId, [
-            Query.equal('employee_id', userId)
+            Query.equal('id', userId)
         ]);
 
         if (docs.total !== 1) {
