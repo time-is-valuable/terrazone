@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "@terrazone/ui": "workspace:*",
+    "@terrazone/tailwind-config": "workspace:*",
+    "date-fns": "^3.6.0",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sharp": "^0.33.4"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -24,5 +29,6 @@
     "react-spring": "^9.7.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "type": "module"
 }
