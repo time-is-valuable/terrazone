@@ -10,42 +10,42 @@ const Aeonik = localFont({
   src: [
     {
       path: '../../public/fonts/AeonikPro-Light.woff2',
-      weight: '400',
+      weight: '300',
       style: 'normal',
     },
     {
       path: '../../public/fonts/AeonikPro-LightItalic.woff2',
-      weight: '400',
+      weight: '300',
       style: 'italic',
     },
     {
       path: '../../public/fonts/AeonikPro-Regular.woff2',
-      weight: '500',
+      weight: '400',
       style: 'normal',
     },
     {
       path: '../../public/fonts/AeonikPro-RegularItalic.woff2',
-      weight: '500',
+      weight: '400',
       style: 'italic',
     },
     {
       path: '../../public/fonts/AeonikPro-Medium.woff2',
-      weight: '600',
+      weight: '500',
       style: 'normal',
     },
     {
       path: '../../public/fonts/AeonikPro-MediumItalic.woff2',
-      weight: '600',
+      weight: '500',
       style: 'italic',
     },
     {
       path: '../../public/fonts/AeonikPro-Bold.woff2',
-      weight: '700',
+      weight: '600',
       style: 'normal',
     },
     {
       path: '../../public/fonts/AeonikPro-BoldItalic.woff2',
-      weight: '700',
+      weight: '600',
       style: 'italic',
     },
   ],

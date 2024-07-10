@@ -41,7 +41,7 @@ const DropdownContent = forwardRef(
       <DropdownPrimitive.Content
         className={classNames(
           'z-[9999] mt-1 w-full min-w-60 space-y-1 overflow-hidden rounded-lg border p-1 text-xs shadow-lg shadow-black/10 backdrop-blur-sm radix-state-closed:animate-fade-out',
-          'border-[#2D2D31] bg-neutral-800/70 text-neutral-400',
+          'border-brand bg-brand text-neutral-400',
           className
         )}
         ref={ref}

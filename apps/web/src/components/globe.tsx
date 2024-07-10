@@ -3,7 +3,6 @@
 import createGlobe, { type Marker } from 'cobe';
 import { useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
-import { getEmployees, IEmployee } from '~/appwrite/employeesAPIFunc';
 
 export const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
