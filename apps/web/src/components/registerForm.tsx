@@ -85,7 +85,7 @@ export default function registerForm() {
           Sign Up
         </Button>
         <span className="font-normal text-[0.875rem]">
-          Already have an account?{" "}
+          Already have an account?
           <Button className="p-0" variant="link">
             <Link href="/login">Login</Link>
           </Button>
