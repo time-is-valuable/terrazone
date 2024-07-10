@@ -57,7 +57,7 @@ export default function loginForm() {
           />
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col items-center justify-between min-h-[6rem]">
+      <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
         <Button
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
