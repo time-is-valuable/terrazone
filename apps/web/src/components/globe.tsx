@@ -17,32 +17,6 @@ export const Globe = () => {
     ];
   };
 
-  function renderEmployees() {
-    const members = getEmployees();
-
-    if (!members || !members.length) {
-      return;
-    }
-    // -90 to 90 for latitude and -180 to 180 for longitude.
-
-    const memberList = members.map((member: IEmployee) => {
-      const ranLat = Math.round(Math.random() * (90 - -90) + -90);
-      const ranLon = Math.round(Math.random() * (180 - -180) + -180);
-
-      return (
-        <button
-          key={member.employee_name}
-          className="text-white"
-          onClick={() => (focusRef.current = locationToAngles(ranLat, ranLon))}
-        >
-          {member.employee_name}
-        </button>
-      );
-    });
-
-    return <section>{memberList}</section>;
-  }
-
   const [{ r }, api] = useSpring(() => ({
     r: 0,
     config: {
@@ -66,7 +40,9 @@ export const Globe = () => {
     let width = 0;
     let currentPhi = 0;
     let currentTheta = 0;
+
     const doublePi = Math.PI * 2;
+
     const onResize = () =>
       canvasRef.current && (width = canvasRef.current.offsetWidth);
     window.addEventListener('resize', onResize);
@@ -91,7 +67,11 @@ export const Globe = () => {
       glowColor: [1, 1, 1],
       markers,
       onRender: (state) => {
-        state.phi = currentPhi;
+        if (!pointerInteracting.current) {
+          currentPhi += 0.005;
+        }
+
+        state.phi = currentPhi + r.get();
         state.theta = currentTheta;
 
         const [focusPhi, focusTheta] = focusRef.current;
@@ -154,7 +134,6 @@ export const Globe = () => {
           }
         }}
       />
-      {renderEmployees()}
     </div>
   );
 };
