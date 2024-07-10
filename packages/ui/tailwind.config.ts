@@ -1,9 +1,9 @@
 import { Config } from 'tailwindcss';
 import sharedConfig from '@terrazone/tailwind-config';
 
-const config: Pick<Config, 'presets' | 'content'> = {
+const config = {
   content: ['./src/**/*.tsx'],
   presets: [sharedConfig],
-};
+} satisfies Pick<Config, 'presets' | 'content'>;
 
 export default config;

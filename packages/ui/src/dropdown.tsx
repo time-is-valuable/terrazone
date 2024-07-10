@@ -19,9 +19,8 @@ const DropdownTrigger = forwardRef(
     return (
       <DropdownPrimitive.Trigger
         className={classNames(
-          'flex cursor-pointer items-center gap-2 rounded-3xl px-3 py-2 text-xs font-light tracking-wide outline-none transition-colors focus:ring-2',
-          'text-neutral-700 hover:bg-neutral-200/70 focus:ring-neutral-200/70',
-          'dark:text-neutral-400 hover:dark:bg-neutral-800/70 focus:dark:ring-neutral-700/30',
+          'flex items-center justify-between min-w-60 w-full py-1.5 px-3 cursor-pointer rounded-lg',
+          'text-neutral-400 border-[#2D2D31] border-solid border bg-[#1D1D21] hover:bg-[#1D1D21]/90 transition-all focus:ring-neutral-700/30',
           className
         )}
         ref={ref}
@@ -41,9 +40,8 @@ const DropdownContent = forwardRef(
     return (
       <DropdownPrimitive.Content
         className={classNames(
-          'z-[9999] mt-1 w-40 space-y-1 overflow-hidden rounded-lg border p-1 text-xs shadow-lg shadow-black/10 backdrop-blur-sm radix-state-closed:animate-fade-out',
-          'border-neutral-200/70 bg-neutral-100/70 text-neutral-700',
-          'dark:border-neutral-700/30 dark:bg-neutral-800/70 dark:text-neutral-400',
+          'z-[9999] mt-1 w-full space-y-1 overflow-hidden rounded-lg border p-1 text-xs shadow-lg shadow-black/10 backdrop-blur-sm radix-state-closed:animate-fade-out',
+          'border-[#2D2D31] bg-neutral-800/70 text-neutral-400',
           className
         )}
         ref={ref}
@@ -64,8 +62,7 @@ const DropdownItem = forwardRef(
       <DropdownPrimitive.Item
         className={classNames(
           'flex w-full cursor-pointer items-center justify-between gap-2 rounded p-2 outline-none',
-          'focus:bg-neutral-200/70 focus:text-neutral-700 radix-highlighted:bg-neutral-200/70 radix-highlighted:text-neutral-700',
-          'focus:dark:bg-neutral-700/20 focus:dark:text-white radix-highlighted:dark:bg-neutral-700/20 radix-highlighted:dark:text-white',
+          'focus:bg-neutral-700/20 focus:text-white radix-highlighted:bg-neutral-700/20 radix-highlighted:text-white',
           className
         )}
         ref={ref}
@@ -77,56 +74,6 @@ const DropdownItem = forwardRef(
 
 DropdownItem.displayName = 'DropdownItem';
 
-const DropdownSub = ({ ...props }: DropdownPrimitive.DropdownMenuSubProps) => {
-  return <DropdownPrimitive.Sub {...props} />;
-};
-
-DropdownSub.displayName = 'DropdownSub';
-
-const DropdownSubTrigger = forwardRef(
-  (
-    { className, ...props }: DropdownPrimitive.DropdownMenuSubTriggerProps,
-    ref: Ref<HTMLDivElement>
-  ) => {
-    return (
-      <DropdownPrimitive.SubTrigger
-        className={classNames(
-          'flex w-full cursor-pointer items-center justify-between gap-2 rounded p-2 outline-none',
-          'focus:bg-neutral-200/70 focus:text-neutral-700 radix-highlighted:bg-neutral-200/70 radix-highlighted:text-neutral-700',
-          'focus:dark:bg-neutral-700/20 focus:dark:text-white radix-highlighted:dark:bg-neutral-700/20 radix-highlighted:dark:text-white',
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-
-DropdownSubTrigger.displayName = 'DropdownSubTrigger';
-
-const DropdownSubContent = forwardRef(
-  (
-    { className, ...props }: DropdownPrimitive.DropdownMenuSubContentProps,
-    ref: Ref<HTMLDivElement>
-  ) => {
-    return (
-      <DropdownPrimitive.SubContent
-        className={classNames(
-          'mt-1 w-40 space-y-1 overflow-hidden rounded-lg border p-1 text-xs shadow-lg shadow-black/10 backdrop-blur-sm radix-state-closed:animate-fade-out',
-          'border-neutral-200/70 bg-neutral-100/70 text-neutral-700',
-          'dark:border-neutral-700/30 dark:bg-neutral-800/70 dark:text-neutral-400',
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-
-DropdownSubContent.displayName = 'DropdownSubContent';
-
 const DropdownSeparator = forwardRef(
   (
     { className, ...props }: DropdownPrimitive.DropdownMenuSeparatorProps,
@@ -134,12 +81,7 @@ const DropdownSeparator = forwardRef(
   ) => {
     return (
       <DropdownPrimitive.Separator
-        className={classNames(
-          'my-1 h-px w-full',
-          'bg-neutral-300',
-          'dark:bg-neutral-700',
-          className
-        )}
+        className={classNames('my-1 h-px w-full', 'bg-neutral-700', className)}
         ref={ref}
         {...props}
       />
@@ -152,7 +94,4 @@ DropdownSeparator.displayName = 'DropdownSeparator';
 Dropdown.Trigger = DropdownTrigger;
 Dropdown.Content = DropdownContent;
 Dropdown.Item = DropdownItem;
-Dropdown.Sub = DropdownSub;
-Dropdown.SubTrigger = DropdownSubTrigger;
-Dropdown.SubContent = DropdownSubContent;
 Dropdown.Separator = DropdownSeparator;

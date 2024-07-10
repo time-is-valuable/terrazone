@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@phosphor-icons/react": "^2.1.7",
-    "@terrazone/ui": "workspace:*",
+    "@heroicons/react": "^2.1.4",
     "@terrazone/tailwind-config": "workspace:*",
+    "@terrazone/ui": "workspace:*",
     "date-fns": "^3.6.0",
     "next": "14.2.4",
     "react": "^18",

@@ -3,40 +3,44 @@
 import createGlobe, { type Marker } from 'cobe';
 import { useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
-import { getEmployees, IEmployee } from "~/appwrite/employeesAPIFunc";
+import { getEmployees, IEmployee } from '~/appwrite/employeesAPIFunc';
 
 export const Globe = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef<null | number>(null);
   const pointerInteractionMovement = useRef(0);
-  const locationToAngles = (lat:number, long:number) => {
-    return [Math.PI - ((long * Math.PI) / 180 - Math.PI / 2), (lat * Math.PI) / 180]
-  }
 
-  function renderEmployees(){
-    const members = getEmployees()
+  const locationToAngles = (lat: number, long: number) => {
+    return [
+      Math.PI - ((long * Math.PI) / 180 - Math.PI / 2),
+      (lat * Math.PI) / 180,
+    ];
+  };
 
-    if(!members || !members.length){
-        return;
+  function renderEmployees() {
+    const members = getEmployees();
+
+    if (!members || !members.length) {
+      return;
     }
     // -90 to 90 for latitude and -180 to 180 for longitude.
-  
-    const memberList = members.map((member:IEmployee)=>{
-        const ranLat = Math.round(Math.random() * (90-(-90)) + (-90));
-        const ranLon = Math.round(Math.random() * (180-(-180)) + (-180));
-  
-        return(
-            <button key={member.employee_name} className="text-white" onClick = {()=>focusRef.current = locationToAngles(ranLat, ranLon)}>
-                {member.employee_name}
-            </button>
-        )
+
+    const memberList = members.map((member: IEmployee) => {
+      const ranLat = Math.round(Math.random() * (90 - -90) + -90);
+      const ranLon = Math.round(Math.random() * (180 - -180) + -180);
+
+      return (
+        <button
+          key={member.employee_name}
+          className="text-white"
+          onClick={() => (focusRef.current = locationToAngles(ranLat, ranLon))}
+        >
+          {member.employee_name}
+        </button>
+      );
     });
-  
-    return(
-        <section>
-            {memberList}
-        </section>
-    )
+
+    return <section>{memberList}</section>;
   }
 
   const [{ r }, api] = useSpring(() => ({
@@ -50,10 +54,10 @@ export const Globe = () => {
   }));
 
   const markers: Marker[] = [
-    { location: [37.7595, -122.4367], size: 0.3},
+    { location: [37.7595, -122.4367], size: 0.3 },
     { location: [40.7128, -74.006], size: 0.1 },
     { location: [20.7128, -74.006], size: 0.1 },
-    { location: [35.2100, 129.0689], size: 0.1 },
+    { location: [35.21, 129.0689], size: 0.1 },
   ];
 
   const focusRef = useRef([0, 0]);
@@ -82,27 +86,27 @@ export const Globe = () => {
       diffuse: 5.7,
       mapSamples: 16000,
       mapBrightness: 6,
-      baseColor: [1,1,3.4],
+      baseColor: [1, 1, 3.4],
       markerColor: [0.1, 0.8, 1],
       glowColor: [1, 1, 1],
       markers,
       onRender: (state) => {
-        state.phi = currentPhi
-        state.theta = currentTheta
+        state.phi = currentPhi;
+        state.theta = currentTheta;
 
-        const [focusPhi, focusTheta] = focusRef.current
+        const [focusPhi, focusTheta] = focusRef.current;
         const distPositive = (focusPhi - currentPhi + doublePi) % doublePi;
         const distNegative = (currentPhi - focusPhi + doublePi) % doublePi;
 
-         // Control the speed
-         if (distPositive < distNegative) {
-          currentPhi += distPositive * 0.08
+        // Control the speed
+        if (distPositive < distNegative) {
+          currentPhi += distPositive * 0.08;
         } else {
-          currentPhi -= distNegative * 0.08
+          currentPhi -= distNegative * 0.08;
         }
-        currentTheta = currentTheta * 0.92 + focusTheta * 0.08
-        state.width = width * 2
-        state.height = width * 2
+        currentTheta = currentTheta * 0.92 + focusTheta * 0.08;
+        state.width = width * 2;
+        state.height = width * 2;
       },
     });
 
