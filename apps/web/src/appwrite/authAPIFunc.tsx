@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
-import { account, ID } from './config';
+import { account, ID } from "./config";
+import { redirect } from 'next/navigation'
 
 export async function RegisterUser({
   name,
