@@ -10,12 +10,12 @@ export default class AppwriteClient {
     static storage = undefined;
     static databases = undefined;
 
-    static setClient(req) {
+    static setClient() {
         if (!AppwriteClient.client) {
             AppwriteClient.client = new Client()
                 .setEndpoint(process.env.APPWRITE_FUNCTION_API_ENDPOINT)
                 .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-                .setKey(req.headers['x-appwrite-key']);
+                .setKey(process.env.API_KEY);
         }
 
         return AppwriteClient.client;
