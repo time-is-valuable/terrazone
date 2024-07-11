@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Terrazone
 
-## Getting Started
+![Terrazone](assets/terrazone.png)
+Get a hold of your college work time and whereabouts with ease.
 
-First, run the development server:
+## ⚡ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 3D Globe visualizing user's whereabouts.
+- Get user working details in your local time
+- Set your working time and place as private for team members only.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🗄️ Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Appwrite [Auth](https://appwrite.io/docs/products/auth) for user signing.
+- Appwrite [Databases](https://appwrite.io/docs/products/databases) for storing users' information.
+- Appwrite [Permissions](https://appwrite.io/docs/products/databases/permissions) and [Teams](https://appwrite.io/docs/products/auth/teams) for data safety.
+- Appwrite [Function](https://appwrite.io/docs/products/functions) for executing server-side code logic.
+- Appwrite [Buckets](https://appwrite.io/docs/products/storage) for storing user profile image.
+- [Turbo](https://turbo.build/repo/docs) for build system.
+- [Next.js](https://nextjs.org/) for frontend.
+- [Vercel](https://vercel.com/) for static hosting
+- [Tailwind CSS](https://tailwindcss.com/) for styling.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Footnote
 
-## Learn More
+Terrazone heavily relies on the Appwrite permission system.
+Appwrite permission system gives the ability to use the API in a seeming way. The documents being returned from the API request going through the permission system and any document that won't match the current user (whether it's a guest or logged-in user) won't be fetched.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Doing so helps to short the amount of time requires for development.
