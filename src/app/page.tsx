@@ -6,12 +6,6 @@ import { Cobe } from '~/components/cobe';
 import { Header } from '~/components/header';
 
 export default async function Home() {
-  const user = await GetAccount();
-
-  if (!user) {
-    redirect('/login');
-  }
-
   const employees = await getEmployees();
 
   if (!employees) return null;
