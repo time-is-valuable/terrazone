@@ -1,8 +1,0 @@
-{
-  "extends": "@terrazone/typescript-config/react-library.json",
-  "compilerOptions": {
-    "outDir": "dist"
-  },
-  "include": ["src", "**/*.ts", "**/*.tsx", "**/*.mjs"],
-  "exclude": ["node_modules", "dist"]
-}
