@@ -77,7 +77,7 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in': 'fade 0.2s ease',
+        'fade-in': 'fade 1000ms ease',
         'fade-out': 'scale-out-content 0.2s ease reverse',
       },
     },

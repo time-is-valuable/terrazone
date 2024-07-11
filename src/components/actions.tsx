@@ -13,7 +13,7 @@ export const Actions = () => {
   if (!activeUser) return;
 
   return (
-    <div className="fixed animate-fade-in flex justify-between items-center border bottom-10 min-h-20 px-4 py-6 bg-[#1a1a1a] border-[#2D2D31] shadow-xl shadow-black/30 max-w-5xl w-full rounded-lg">
+    <div className="fixed animate-fade-in flex gap-8 justify-between items-center border bottom-10 min-h-20 px-8 py-6 bg-[#1a1a1a] border-[#2D2D31] shadow-xl shadow-black/30 max-w-5xl w-full rounded-lg">
       <div>
         <h3 className="text-2xl">{activeUser.employee_name}</h3>
         <h4 className="text-white/50 text-sm">

@@ -1,15 +1,19 @@
-import dynamic from 'next/dynamic';
 import { getEmployees } from '~/appwrite/mock-employees';
 import { Actions } from '~/components/actions';
 import { Cobe } from '~/components/cobe';
 import { Header } from '~/components/header';
 
 export default async function Home() {
-  const employees = await getEmployees();
-  console.log(employees);
+  // const user = await getAccount();
+
+  // if (!user) {
+  //   redirect('/login');
+  // }
+
+  const employees = getEmployees();
   return (
-    <main className="bg-gradient-to-br from-black to-neutral-900 flex min-h-screen flex-col items-center">
-      <Header />
+    <main className="flex min-h-screen flex-col items-center">
+      <Header employees={employees!} />
       <Cobe />
       <Actions />
     </main>

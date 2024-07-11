@@ -10,14 +10,18 @@ import {
   ArrowUturnLeftIcon,
 } from '@heroicons/react/24/solid';
 import { useUserStore } from '~/state/user-store';
+import { useRouter } from 'next/navigation';
+import { SearchEmployees } from './search-employees';
+import { Employee } from '~/appwrite/mock-employees';
 
-export const Header = () => {
+export const Header = ({ employees }: { employees: Employee[] }) => {
+  const router = useRouter();
   const { setActiveUser } = useUserStore();
   const { localTime, timezone } = useLocalTime();
 
   return (
-    <header className="p-4 flex w-full justify-between">
-      <section className="p-4 flex flex-col align-start w-full">
+    <header className="py-6 px-8 flex w-full justify-between items-start">
+      <section className="flex flex-col align-start">
         <h2 className="text-white opacity-50 text-lg">
           Your local time ({timezone})
         </h2>
@@ -30,30 +34,7 @@ export const Header = () => {
         </div>
       </section>
 
-      {/* <button
-        className="text-white"
-        onClick={() =>
-          setActiveUser({
-            employee_id: 'aaa',
-            employee_name: 'Jesse Winton',
-            location: 'USA',
-            timezone: 'America/New_York',
-            title: 'Design Engineer',
-            workHours: '9:00am — 5:00pm',
-            times: {
-              saturday: { isWorking: false, from: '00:00', to: '23:30' },
-              sunday: { isWorking: false, from: '00:00', to: '23:30' },
-              monday: { isWorking: true, from: '09:00', to: '17:00' },
-              tuesday: { isWorking: true, from: '09:00', to: '17:00' },
-              wednesday: { isWorking: true, from: '09:00', to: '17:00' },
-              thursday: { isWorking: true, from: '09:00', to: '17:00' },
-              friday: { isWorking: true, from: '09:00', to: '14:00' },
-            },
-          })
-        }
-      >
-        Activate
-      </button> */}
+      <SearchEmployees employees={employees} />
 
       <section className="flex flex-col">
         <Dropdown>
@@ -66,7 +47,10 @@ export const Header = () => {
             <ChevronDownIcon className="size-8 text-white" />
           </Dropdown.Trigger>
           <Dropdown.Content className="w-full text-sm">
-            <Dropdown.Item className="flex items-center gap-2">
+            <Dropdown.Item
+              className="flex items-center gap-2"
+              onSelect={() => router.push('/dashboard')}
+            >
               <Cog6ToothIcon className="size-4 text-neutral-500" />
               Settings
             </Dropdown.Item>
