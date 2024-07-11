@@ -112,7 +112,7 @@ export const Cobe = ({ employees }: { employees: Employee[] }) => {
     <div className="w-full max-w-4xl aspect-square m-auto absolute top-1/2 -translate-y-1/2">
       <canvas
         ref={canvasRef}
-        className="w-full h-full cursor-grab contain-layout contain-paint contain-size opacity-0 transition-opacity duration-1000 ease"
+        className="w-full h-full contain-layout contain-paint contain-size opacity-0 transition-opacity duration-1000 ease"
         onPointerDown={(e) => {
           pointerInteracting.current =
             e.clientX - pointerInteractionMovement.current;
