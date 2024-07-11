@@ -67,10 +67,10 @@ export default function About() {
         </h2>
 
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Access to Terrazone is secure and straightforward. Users can easily
+          {`Access to Terrazone is secure and straightforward. Users can easily
           log in or register using their email and password. This ensures that
           only authorized personnel can access the platform, maintaining the
-          integrity and security of your company's data.
+          integrity and security of your company's data.`}
         </p>
 
         <h2 className="mt-10 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight transition-colors first:mt-0">
@@ -115,14 +115,14 @@ export default function About() {
         </h2>
 
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          Embrace the future of global workforce management with Terrazone. Our
+          {`Embrace the future of global workforce management with Terrazone. Our
           innovative platform is designed to simplify scheduling, enhance
           transparency, and improve collaboration across different time zones.
           Whether you're a small business or a large enterprise, Terrazone
           provides the tools you need to manage your global team effectively.
           Visit our website to learn more and start your journey with Terrazone
           today. Enhance your team's productivity and connectivity with the
-          power of innovative technology.
+          power of innovative technology.`}
         </p>
       </div>
     </main>

@@ -68,7 +68,7 @@ export default function LoginForm() {
           Login
         </Button>
         <span className="font-normal text-[0.875rem]">
-          Don't have an account?{' '}
+          {`Don't have an account? `}
           <Button className="p-0" variant="link">
             <Link href="/register">Register</Link>
           </Button>

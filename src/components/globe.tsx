@@ -26,8 +26,6 @@ export const Globe = () => {
 
   useEffect(() => {
     if (globeRef.current) {
-      console.log('Globe instance:', globeRef.current);
-
       globeRef.current
         .globeImageUrl(
           '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
@@ -42,7 +40,7 @@ export const Globe = () => {
         globeRef.current?.pointsData(gData);
       }, 4000);
     }
-  }, [globeRef]);
+  }, [globeRef, gData]);
 
   return (
     <div className="w-[100vh] h-[100vh] absolute top-0">
