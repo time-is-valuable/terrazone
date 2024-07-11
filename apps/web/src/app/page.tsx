@@ -1,6 +1,13 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import { Actions } from '~/components/actions';
-import { Globe } from '~/components/globe';
 import { Header } from '~/components/header';
+
+const Globe = dynamic(
+  () => import('~/components/globe').then((mod) => mod.Globe),
+  { ssr: false }
+);
 
 export default function Home() {
   return (

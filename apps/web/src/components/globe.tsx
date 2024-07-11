@@ -1,10 +1,10 @@
 'use client';
 
-import { Canvas, Object3DNode, extend } from '@react-three/fiber';
-
-import { useLayoutEffect, useRef, useState } from 'react';
+import { Canvas, Object3DNode, extend, useFrame } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
 import ThreeGlobe from 'three-globe';
 import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 
 extend({ ThreeGlobe });
 
@@ -15,34 +15,36 @@ declare module '@react-three/fiber' {
 }
 
 export const Globe = () => {
-  const globeRef = useRef<ThreeGlobe>(new ThreeGlobe());
+  const globeRef = useRef<ThreeGlobe>(null);
+  const groupRef = useRef<THREE.Group>(null);
 
   const N = 300;
-  const gData = [...Array({ length: N })].map(() => ({
+  const gData = [...Array(N)].map(() => ({
     lat: (Math.random() - 0.5) * 180,
     lng: (Math.random() - 0.5) * 360,
     size: Math.random() / 3,
     color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)],
   }));
 
-  useLayoutEffect(() => {
-    try {
+  useEffect(() => {
+    if (globeRef.current) {
+      console.log('Globe instance:', globeRef.current);
+
       globeRef.current
-        ?.globeImageUrl(
+        .globeImageUrl(
           '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
         )
-        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');
-    } catch (error) {
-      console.error('Error loading globe image:', error);
+        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+        .onGlobeReady(() => {
+          console.log('Globe images loaded');
+        });
+
+      setTimeout(() => {
+        gData.forEach((d) => (d.size = Math.random()));
+        globeRef.current?.pointsData(gData);
+      }, 4000);
     }
-
-    console.log('globeRef:', globeRef.current);
-  }, []);
-
-  setTimeout(() => {
-    gData.forEach((d) => (d.size = Math.random()));
-    globeRef.current?.pointsData(gData);
-  }, 4000);
+  }, [globeRef]);
 
   return (
     <div className="w-[100vh] h-[100vh] absolute top-0">
@@ -60,11 +62,9 @@ export const Globe = () => {
           position={[100, 20, 500]}
           castShadow
         />
-        <perspectiveCamera
-          position={[0, 0, 500]}
-          aspect={window.innerWidth / window.innerHeight}
-        />
-        <threeGlobe ref={globeRef} />
+        <group ref={groupRef}>
+          <threeGlobe ref={globeRef} />
+        </group>
         <OrbitControls autoRotate enableZoom={false} />
       </Canvas>
     </div>
