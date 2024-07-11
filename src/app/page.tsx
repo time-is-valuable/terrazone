@@ -1,16 +1,16 @@
 import { redirect } from 'next/navigation';
-import { getAccount } from '~/appwrite/authAPIFunc';
+import { GetAccount } from '~/appwrite/authAPIFunc';
 import { getEmployees } from '~/appwrite/get-employees';
 import { Actions } from '~/components/actions';
 import { Cobe } from '~/components/cobe';
 import { Header } from '~/components/header';
 
 export default async function Home() {
-  // const user = await getAccount();
+  const user = await GetAccount();
 
-  // if (!user) {
-  //   redirect('/login');
-  // }
+  if (!user) {
+    redirect('/login');
+  }
 
   const employees = await getEmployees();
 
