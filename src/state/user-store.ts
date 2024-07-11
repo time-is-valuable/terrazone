@@ -14,14 +14,15 @@ export const useUserStore = create<UserState>((set, get) => ({
   setActiveUser: async (employee_id) => {
     const employees = await getEmployees();
     const user = employees!.find((employee) => employee.id === employee_id);
-    set({ activeUser: user });
+    set({ activeUser: user! });
   },
   activeTimezone: {
     lat: 34.052234,
     long: -118.243685,
   },
   setActiveTimezone: () => {
+    const activeUser = get().activeUser;
     const tz = timezones.find((tz) => tz.value === get().activeUser?.timezone);
-    set({ activeTimezone: { lat: tz!.lat, long: tz!.long } });
+    set({ activeTimezone: { lat: tz?.lat ?? 0, long: tz?.long ?? 0 } });
   },
 }));
