@@ -55,7 +55,7 @@ const [times, setTimes] = useState<string>("");
 const [name, setName] = useState<string>("");
 
 function saveInput(){
-    // createWorkingHours({data: {times: times, timezone:timezone, employee_name: name, }});
+    createWorkingHours({data: {times: times, timezone:timezone, employee_name: name, }});
 }
 
 const timeZoneOptions = timezones.map((time:string)=>{
@@ -68,49 +68,74 @@ const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sat
 
 const weeklyCheckbox = daysOfWeek.map((day:string)=>{
   return(
-    <div>
-        <Checkbox id = {day}/>
-        <Label htmlFor = {day}>{day}</Label>
+    <div className="flex items-center">
+        <Checkbox id = {day} className="border-[.1rem] border-[#2D2D31] mr-2 my-2"/>
+        <Label className="font-normal" htmlFor = {day}>{day}</Label>
     </div>
   )
 });
 
   return (
-    <Card className="h-[450px] w-[850px] bg-[#1a1a1a] border-[#2D2D31] border-[.1rem]">
-      <CardHeader>
-        <CardTitle className="font-normal text-center text-[2rem]">
+    <Card className="py-[1.2rem] px-[1rem] flex items-start justify-between h-[520px] w-[950px] bg-[#1a1a1a] border-[#2D2D31] border-[.1rem]">
+      <CardHeader className="p-0">
+        <CardTitle className="font-normal text-center text-[1.25rem]">
           Working hours
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Label htmlFor="timezone" />
+
+        <section className="mb-4">
+        <Label htmlFor="timezone" className="font-normal">Timezone</Label>
 
         <Select>
-          <SelectTrigger id="timezone" className="w-full">
+          <SelectTrigger id="timezone" className="mt-2 w-[40rem]">
             <SelectValue placeholder="Pacific/Midway (SST)" />
           </SelectTrigger>
           <SelectContent>
             {timeZoneOptions}
           </SelectContent>
         </Select>
-
-        <section className="flex">
-        <Input type = "time"/>
-
-        <Input type = "time"/>
         </section>
 
-        <section className="flex flex-col items-start">
+        <section className="pb-[1rem] w-[w-full] flex justify-between items-center">
+          <div className='w-[19rem] flex flex-col items-start'>
+          <Label className="pb-2 font-normal" htmlFor="timezone">Start</Label>
+          <Input className="text-[rgb(255,255,255,0.5)]" placeholder="10:00 PM" type = "time"/>
+          </div>
+     
+
+          <div className="w-[19rem] flex flex-col items-start">
+          <Label className="pb-2 font-normal" htmlFor="timezone">End</Label>
+          <Input className="text-[rgb(255,255,255,0.5)]" placeholder="10:00 PM" type = "time"/>
+          </div>
+ 
+        </section>
+
+        <section className="flex flex-col items-start mb-4">
         {weeklyCheckbox}
 
         </section>
 
-        <Switch id="data-public"/>
-        <Label htmlFor="data-public">Show data publically</Label>
+        <div className="flex items-center">
+        <Switch id="data-public" checked={true} className="mr-2"/>
+        <Label htmlFor="data-public" className="font-normal">Show data publically</Label>
 
+        </div>
 
+        <section className="flex justify-end">
+      
+        <Button
+          className="text-[0.875rem] bg-transparent text-white border-[.1rem] border-[#2D2D31]"
+          onClick={() => {
+            saveInput();
+          }}
+        >
+          Save
+        </Button>
+        </section>
       </CardContent>
-      <CardFooter className="flex flex-col items-center justify-between min-h-[6rem]"></CardFooter>
+
+
     </Card>
   );
 }

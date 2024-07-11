@@ -11,6 +11,7 @@ import { Label } from "./ui/label";
 import { useState } from "react";
 import { createEmployeeData, updateEmployeeData, listEmployeeData, uploadImage } from "../appwrite/employeeAPIFunc";
 import { getAccount } from "~/appwrite/authAPIFunc";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Profile() {
   const [name, setName] = useState("");
@@ -55,12 +56,13 @@ export default function Profile() {
   }
 
   return (
-    <Card className="p-[1.2rem] mb-[1rem] h-[350px] flex justify-between w-[850px] bg-[#1a1a1a] border-[#2D2D31] border-[.1rem]">
+    <Card className="py-[1.2rem] px-[1rem] mb-[1rem] h-[420px] w-[950px] flex justify-between bg-[#1a1a1a] border-[#2D2D31] border-[.1rem]">
       <CardHeader className="flex p-0">
         <CardTitle className="font-normal text-[1.25rem]">Profile</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col items-end">
-        <div className="w-[30rem] flex flex-col flex-start mb-4">
+
+        <div className="w-[40rem] flex flex-col flex-start mb-4">
           <Label className="mb-2 font-normal w-full" htmlFor="name">
             Name
           </Label>
@@ -75,7 +77,7 @@ export default function Profile() {
         <div className="w-full items-center gap-1.5">
           <Input
             type="file"
-            className="cursor-pointer flex h-[11rem] mb-2 border-[.1rem] border-[#2D2D31]"
+            className="cursor-pointer flex h-[15rem] mb-2 border-[.1rem] border-[#2D2D31]"
             onChange={(e) => {
               if (!e.target.files) {
                 return;
@@ -86,7 +88,7 @@ export default function Profile() {
         </div>
 
         <Button
-          className="text-[0.875rem] bg-transparent text-white border-[.1rem] border-[#2D2D31]"
+          className="mt-2 text-[0.875rem] bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={() => {
             saveInput();
           }}
