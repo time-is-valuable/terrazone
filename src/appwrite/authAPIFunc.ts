@@ -31,8 +31,13 @@ export async function loginUser({
   redirectURL: string;
 }) {
   try {
-    await account.createEmailPasswordSession(email, password);
-    redirect('/');
+    const login = await account.createEmailPasswordSession(email, password);
+
+    if(!login){
+      return;
+    }
+
+    redirect(redirectURL);
   } catch (err) {
     console.error(err);
   }
@@ -48,7 +53,12 @@ export async function getAccount() {
 
 export async function logout({redirectURL}:{redirectURL: string}) {
   try {
-    await account.deleteSessions();
+    const logout = await account.deleteSessions();
+
+    if(!logout){
+      return;
+    }
+
     redirect(redirectURL);
   } catch (err) {
     console.error(err);
