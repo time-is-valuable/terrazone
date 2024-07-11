@@ -62,7 +62,7 @@ export default function LoginForm() {
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
             e.preventDefault();
-            loginUser({ email: email, password: password, redirectURL: "/"});
+            LoginUser({ email: email, password: password, redirectURL: "/"});
           }}
         >
           Login

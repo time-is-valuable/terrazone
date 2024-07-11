@@ -79,7 +79,7 @@ export default function RegisterForm() {
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
             e.preventDefault();
-            registerUser({ name: name, email: email, password: password, redirectURL: "/" });
+            RegisterUser({ name: name, email: email, password: password, redirectURL: "/" });
           }}
         >
           Sign Up
