@@ -7,8 +7,9 @@ import { IoIosArrowBack } from "react-icons/io";
 export default function Dashboard(){
    return(
     <section className="p-4 flex justify-between">
+
         <section className="flex flex-col align-start justify-start">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center w-[7rem]">
                 <IoIosArrowBack className="p-0"/>
                 <Button variant="link" className="p-0"><Link href="/">Back</Link></Button>
             </div>
