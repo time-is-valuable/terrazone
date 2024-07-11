@@ -1,10 +1,9 @@
 'use client';
 
-import { Canvas, Object3DNode, extend, useFrame } from '@react-three/fiber';
+import { Canvas, Object3DNode, extend } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
 import ThreeGlobe from 'three-globe';
 import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
 
 extend({ ThreeGlobe });
 

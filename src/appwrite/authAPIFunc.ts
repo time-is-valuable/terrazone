@@ -1,4 +1,5 @@
-import { account, ID } from "./config";
+import { redirect } from 'next/navigation';
+import { account, ID } from './config';
 
 export async function registerUser({
   name,
@@ -27,6 +28,7 @@ export async function loginUser({
 }) {
   try {
     await account.createEmailPasswordSession(email, password);
+    redirect('/');
   } catch (err) {
     console.error(err);
   }

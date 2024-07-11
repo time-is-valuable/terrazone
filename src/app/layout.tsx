@@ -62,18 +62,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        'text-white font-sans bg-[url("/images/background1.png")] bg-no-repeat bg-cover',
-        Aeonik.variable
-      )}
-    >
-      <body>
+    <html lang="en">
+      <body
+        className={cn(
+          'text-white font-sans bg-[url(/images/background1.png)] bg-no-repeat bg-cover',
+          Aeonik.variable
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           {children}

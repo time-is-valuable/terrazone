@@ -88,17 +88,14 @@ const mockData = [
   },
 ];
 
-export function getEmployees() {
+export const getEmployees = async () => {
   try {
-    // const data = await database.listDocuments(
-    //     '<DATABASE_ID>',
-    //     '<COLLECTION_ID>',
-    // );
+    const data = await database.listDocuments('terrazone', 'employees');
 
-    return mockData;
+    return data.documents;
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 export type User = (typeof mockData)[number];
