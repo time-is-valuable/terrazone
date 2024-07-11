@@ -1,21 +1,21 @@
-"use client";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { useState } from "react";
+'use client';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { useState } from 'react';
 import {
   Card,
   CardContent,
   CardTitle,
   CardHeader,
   CardFooter,
-} from "./ui/card";
-import { Button } from "./ui/button";
-import Link from "next/link";
-import { loginUser } from "~/appwrite/authAPIFunc";
+} from './ui/card';
+import { Button } from './ui/button';
+import Link from 'next/link';
+import { loginUser } from '~/appwrite/authAPIFunc';
 
-export default function loginForm() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+export default function LoginForm() {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   return (
     <Card className="h-[430px] w-[450px] bg-[#1a1a1a] border-[#2D2D31] border-[.1rem]">
@@ -68,7 +68,7 @@ export default function loginForm() {
           Login
         </Button>
         <span className="font-normal text-[0.875rem]">
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Button className="p-0" variant="link">
             <Link href="/register">Register</Link>
           </Button>
