@@ -30,7 +30,7 @@ export const Header = () => {
         </div>
       </section>
 
-      <button
+      {/* <button
         className="text-white"
         onClick={() =>
           setActiveUser({
@@ -53,7 +53,7 @@ export const Header = () => {
         }
       >
         Activate
-      </button>
+      </button> */}
 
       <section className="flex flex-col">
         <Dropdown>

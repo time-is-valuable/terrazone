@@ -1,138 +1,72 @@
 'use client';
 
-import createGlobe, { type Marker } from 'cobe';
-import { useEffect, useRef } from 'react';
-import { useSpring } from 'react-spring';
+import { Canvas, Object3DNode, extend } from '@react-three/fiber';
+
+import { useLayoutEffect, useRef, useState } from 'react';
+import ThreeGlobe from 'three-globe';
+import { OrbitControls } from '@react-three/drei';
+
+extend({ ThreeGlobe });
+
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    threeGlobe: Object3DNode<ThreeGlobe, typeof ThreeGlobe>;
+  }
+}
 
 export const Globe = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerInteracting = useRef<null | number>(null);
-  const pointerInteractionMovement = useRef(0);
+  const globeRef = useRef<ThreeGlobe>(new ThreeGlobe());
 
-  const locationToAngles = (lat: number, long: number) => {
-    return [
-      Math.PI - ((long * Math.PI) / 180 - Math.PI / 2),
-      (lat * Math.PI) / 180,
-    ];
-  };
-
-  const [{ r }, api] = useSpring(() => ({
-    r: 0,
-    config: {
-      mass: 1,
-      tension: 280,
-      friction: 40,
-      precision: 0.001,
-    },
+  const N = 300;
+  const gData = [...Array({ length: N })].map(() => ({
+    lat: (Math.random() - 0.5) * 180,
+    lng: (Math.random() - 0.5) * 360,
+    size: Math.random() / 3,
+    color: ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)],
   }));
 
-  const markers: Marker[] = [
-    { location: [37.7595, -122.4367], size: 0.3 },
-    { location: [40.7128, -74.006], size: 0.1 },
-    { location: [20.7128, -74.006], size: 0.1 },
-    { location: [35.21, 129.0689], size: 0.1 },
-  ];
-
-  const focusRef = useRef([0, 0]);
-
-  useEffect(() => {
-    let width = 0;
-    let currentPhi = 0;
-    let currentTheta = 0;
-
-    const doublePi = Math.PI * 2;
-
-    const onResize = () =>
-      canvasRef.current && (width = canvasRef.current.offsetWidth);
-    window.addEventListener('resize', onResize);
-    onResize();
-
-    if (!canvasRef.current) {
-      return;
+  useLayoutEffect(() => {
+    try {
+      globeRef.current
+        ?.globeImageUrl(
+          '//unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
+        )
+        .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png');
+    } catch (error) {
+      console.error('Error loading globe image:', error);
     }
 
-    const globe = createGlobe(canvasRef.current, {
-      devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
-      phi: 0,
-      theta: 0,
-      dark: 1,
-      diffuse: 5.7,
-      mapSamples: 16000,
-      mapBrightness: 6,
-      baseColor: [1, 1, 3.4],
-      markerColor: [0.1, 0.8, 1],
-      glowColor: [1, 1, 1],
-      markers,
-      onRender: (state) => {
-        if (!pointerInteracting.current) {
-          currentPhi += 0.005;
-        }
-
-        state.phi = currentPhi + r.get();
-        state.theta = currentTheta;
-
-        const [focusPhi, focusTheta] = focusRef.current;
-        const distPositive = (focusPhi - currentPhi + doublePi) % doublePi;
-        const distNegative = (currentPhi - focusPhi + doublePi) % doublePi;
-
-        // Control the speed
-        if (distPositive < distNegative) {
-          currentPhi += distPositive * 0.08;
-        } else {
-          currentPhi -= distNegative * 0.08;
-        }
-        currentTheta = currentTheta * 0.92 + focusTheta * 0.08;
-        state.width = width * 2;
-        state.height = width * 2;
-      },
-    });
-
-    setTimeout(() => (canvasRef.current!.style.opacity = '1'));
-    return () => {
-      globe.destroy();
-      window.removeEventListener('resize', onResize);
-    };
+    console.log('globeRef:', globeRef.current);
   }, []);
 
+  setTimeout(() => {
+    gData.forEach((d) => (d.size = Math.random()));
+    globeRef.current?.pointsData(gData);
+  }, 4000);
+
   return (
-    <div className="block">
-      <canvas
-        ref={canvasRef}
-        className="w-[600px] h-[600px] max-w-full aspect-[1]"
-        onPointerDown={(e) => {
-          pointerInteracting.current =
-            e.clientX - pointerInteractionMovement.current;
-          canvasRef.current!.style.cursor = 'grabbing';
+    <div className="w-[100vh] h-[100vh] absolute top-0">
+      <Canvas
+        camera={{
+          position: [0, 0, 400],
+          fov: 40,
+          near: 1,
+          far: 600,
         }}
-        onPointerUp={() => {
-          pointerInteracting.current = null;
-          canvasRef.current!.style.cursor = 'grab';
-        }}
-        onPointerOut={() => {
-          pointerInteracting.current = null;
-          canvasRef.current!.style.cursor = 'grab';
-        }}
-        onMouseMove={(e) => {
-          if (pointerInteracting.current !== null) {
-            const delta = e.clientX - pointerInteracting.current;
-            pointerInteractionMovement.current = delta;
-            api.start({
-              r: delta / 200,
-            });
-          }
-        }}
-        onTouchMove={(e) => {
-          if (pointerInteracting.current !== null && e.touches[0]) {
-            const delta = e.touches[0].clientX - pointerInteracting.current;
-            pointerInteractionMovement.current = delta;
-            api.start({
-              r: delta / 100,
-            });
-          }
-        }}
-      />
+      >
+        <directionalLight
+          color="orange"
+          intensity={0.6 * Math.PI}
+          position={[100, 20, 500]}
+          castShadow
+        />
+        <perspectiveCamera
+          position={[0, 0, 500]}
+          aspect={window.innerWidth / window.innerHeight}
+        />
+        <threeGlobe ref={globeRef} />
+        <OrbitControls autoRotate enableZoom={false} />
+      </Canvas>
     </div>
   );
 };
