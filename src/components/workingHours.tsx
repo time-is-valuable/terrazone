@@ -19,52 +19,26 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Switch } from "./ui/switch";
-// import { createWorkingHours } from "~/appwrite/scheduleAPIFunc";
+import { CreateEmployeeData } from "~/appwrite/employeeAPIFunc";
 import { useState } from "react";
+import { daysOfWeek } from "~/static/daysOfWeek";
+import { timezones, ITimezone } from "~/static/timezoneCoordinate";
 
 export default function WorkingHours() {
-
-const timezones = [
-  "Pacific/Midway (SST)",
-  "Pacific/Honolulu (HST)",
-  "America/Anchorage (AKST)",
-  "America/Los_Angeles (PST)",
-  "America/Denver (MST)",
-  "America/Chicago (CST)",
-  "America/New_York (EST)",
-  "America/Argentina/Buenos_Aires (ART)",
-  "America/Santiago (CLT)",
-  "America/St_Johns (NST)",
-  "America/Sao_Paulo (BRT)",
-  "Atlantic/South_Georgia (GST)",
-  "Atlantic/Azores (AZOT)",
-  "Europe/London (GMT/BST)",
-  "Europe/Paris (CET/CEST)",
-  "Europe/Berlin (CET/CEST)",
-  "Europe/Moscow (MSK)",
-  "Asia/Dubai (GST)",
-  "Asia/Kolkata (IST)",
-  "Asia/Shanghai (CST)",
-  "Asia/Tokyo (JST)",
-  "Australia/Sydney (AEST)",
-  "Pacific/Auckland (NZST)"
-];
 
 const [timezone, setTimeZone] = useState<string>("");
 const [times, setTimes] = useState<string>("");
 const [name, setName] = useState<string>("");
 
 function saveInput(){
-    createWorkingHours({data: {times: times, timezone:timezone, employee_name: name, }});
+    CreateEmployeeData({data: {employee_id: '', location: '', photo_id: '', times: times, timezone:timezone, employee_name: name, }});
 }
 
-const timeZoneOptions = timezones.map((time:string)=>{
+const timeZoneOptions = timezones.map((time:ITimezone)=>{
   return(
-    <SelectItem key={time} value={time}>{time}</SelectItem>
+    <SelectItem key={time.timezone} value={time.timezone}>{time.timezone} {time.greenWichTime}</SelectItem>
   )
 });
-
-const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 const weeklyCheckbox = daysOfWeek.map((day:string)=>{
   return(
@@ -89,7 +63,7 @@ const weeklyCheckbox = daysOfWeek.map((day:string)=>{
 
         <Select>
           <SelectTrigger id="timezone" className="mt-2 w-[40rem]">
-            <SelectValue placeholder="Pacific/Midway (SST)" />
+            <SelectValue placeholder="Africa/Abidjan +0:00" />
           </SelectTrigger>
           <SelectContent>
             {timeZoneOptions}

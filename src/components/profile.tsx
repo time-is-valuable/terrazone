@@ -9,8 +9,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useState } from "react";
-import { createEmployeeData, updateEmployeeData, listEmployeeData, uploadImage } from "../appwrite/employeeAPIFunc";
-import { getAccount } from "~/appwrite/authAPIFunc";
+import { CreateEmployeeData, UpdateEmployeeData, ListEmployeeData, UploadImage } from "../appwrite/employeeAPIFunc";
+import { GetAccount } from "~/appwrite/authAPIFunc";
 import { IoIosArrowBack } from "react-icons/io";
 
 export default function Profile() {
@@ -18,9 +18,9 @@ export default function Profile() {
   const [file, setFile] = useState<File>();
 
   async function saveInput() {
-    const account = await getAccount();
+    const account = await GetAccount();
 
-    const employee = await listEmployeeData();
+    const employee = await ListEmployeeData();
 
     if(!employee){
       return;
@@ -45,13 +45,13 @@ export default function Profile() {
       return;
     }
 
-    const image = await uploadImage({file: file});
+    const image = await UploadImage({file: file});
 
     if(!image){
       return;
     }
 
-    createEmployeeData({data: {employee_name: name, photo_id: image.$id, timezone: '', location: '', times: ''}});
+    CreateEmployeeData({data: {employee_id: '', employee_name: name, photo_id: image.$id, timezone: '', location: '', times: ''}});
 
   }
 
