@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { getEmployees, type Employee } from '~/appwrite/get-employees';
+import { timezones } from '~/lib/timezones';
 
 type UserState = {
   activeUser: Employee | null;
@@ -20,8 +21,7 @@ export const useUserStore = create<UserState>((set, get) => ({
     long: -118.243685,
   },
   setActiveTimezone: () => {
-    console.log(get().activeUser?.timezone);
-    //const tz = timezones.find((tz) => tz.value === get().activeUser?.timezone);
-    set({ activeTimezone: { lat: 0, long: 0 } });
+    const tz = timezones.find((tz) => tz.value === get().activeUser?.timezone);
+    set({ activeTimezone: { lat: tz!.lat, long: tz!.long } });
   },
 }));

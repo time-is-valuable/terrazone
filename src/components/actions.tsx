@@ -4,7 +4,6 @@ import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useLocalTime } from '~/hooks/use-localtime';
 import { cn } from '~/lib/utils';
 import { useUserStore } from '~/state/user-store';
-import { format } from 'date-fns';
 
 export const Actions = () => {
   const { activeUser } = useUserStore();

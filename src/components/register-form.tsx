@@ -2,16 +2,17 @@
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardTitle,
-  CardHeader,
-  CardFooter,
-} from './ui/card';
+
 import { Button } from './ui/button';
 import Link from 'next/link';
-import { registerUser } from '~/appwrite/authAPIFunc';
+import { RegisterUser } from '~/appwrite/authAPIFunc';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from './ui/card';
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>('');
@@ -75,21 +76,29 @@ export default function RegisterForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
-      <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
         <Button
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
             e.preventDefault();
-            RegisterUser({ name: name, email: email, password: password, redirectURL: "/" });
-            RegisterUser({ name: name, email: email, password: password, redirectURL: "/" });
+            RegisterUser({
+              name: name,
+              email: email,
+              password: password,
+              redirectURL: '/',
+            });
+            RegisterUser({
+              name: name,
+              email: email,
+              password: password,
+              redirectURL: '/',
+            });
           }}
         >
           Sign Up
         </Button>
         <span className="font-normal text-[0.875rem]">
           Already have an account?
-          <Button className="p-0 ml-[.4rem]" variant="link">
-          <Button className="p-0 ml-[.4rem]" variant="link">
+          <Button className="p-0 ml-[.4rem]">
             <Link href="/login">Login</Link>
           </Button>
         </span>

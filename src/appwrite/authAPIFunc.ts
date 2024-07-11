@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
-import { account, ID } from './config';
+import { account, ID } from '~/appwrite/config';
 
 export async function RegisterUser({
   name,
   email,
   password,
-  redirectURL
+  redirectURL,
 }: {
   name: string;
   email: string;
@@ -15,7 +15,11 @@ export async function RegisterUser({
   try {
     await account.create(ID.unique(), email, password, name);
 
-    await LoginUser({ email: email, password: password, redirectURL: redirectURL });
+    await LoginUser({
+      email: email,
+      password: password,
+      redirectURL: redirectURL,
+    });
   } catch (err) {
     console.error(err);
   }
@@ -24,7 +28,7 @@ export async function RegisterUser({
 export async function LoginUser({
   email,
   password,
-  redirectURL
+  redirectURL,
 }: {
   email: string;
   password: string;
@@ -33,7 +37,7 @@ export async function LoginUser({
   try {
     const login = await account.createEmailPasswordSession(email, password);
 
-    if(!login){
+    if (!login) {
       return;
     }
 
@@ -51,11 +55,11 @@ export async function GetAccount() {
   }
 }
 
-export async function Logout({redirectURL}:{redirectURL: string}) {
+export async function Logout({ redirectURL }: { redirectURL: string }) {
   try {
     const logout = await account.deleteSessions();
 
-    if(!logout){
+    if (!logout) {
       return;
     }
 

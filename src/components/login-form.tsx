@@ -11,7 +11,7 @@ import {
 } from './ui/card';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import { loginUser } from '~/appwrite/authAPIFunc';
+import { LoginUser } from '~/appwrite/authAPIFunc';
 
 export default function LoginForm() {
   const [email, setEmail] = useState<string>('');
@@ -58,13 +58,12 @@ export default function LoginForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
-      <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
         <Button
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
             e.preventDefault();
-            LoginUser({ email: email, password: password, redirectURL: "/"});
-            LoginUser({ email: email, password: password, redirectURL: "/"});
+            LoginUser({ email: email, password: password, redirectURL: '/' });
+            LoginUser({ email: email, password: password, redirectURL: '/' });
           }}
         >
           Login

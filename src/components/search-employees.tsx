@@ -1,4 +1,4 @@
-import { type Employee } from '~/appwrite/mock-employees';
+import { type Employee } from '~/appwrite/get-employees';
 import {
   Select,
   SelectContent,
