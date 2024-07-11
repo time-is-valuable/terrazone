@@ -22,7 +22,7 @@ export const setup = async () => {
   try {
     await teams.create('employees', 'Employees');
   } catch (e) {
-    console.error('create team: ' + e.toString());
+    console.error('create team: ' + e);
   }
 
   try {
@@ -34,7 +34,7 @@ export const setup = async () => {
       true
     );
   } catch (e) {
-    console.error('Create bucket: ' + e.toString());
+    console.error('Create bucket: ' + e);
   }
 
   try {
@@ -89,6 +89,6 @@ export const setup = async () => {
     );
     // create attributes
   } catch (e) {
-    console.error('setup database: ' + e.toString());
+    console.error('setup database: ' + e);
   }
 };
