@@ -16,7 +16,6 @@ declare module '@react-three/fiber' {
 
 export const Globe = () => {
   const globeRef = useRef<ThreeGlobe>(null);
-  const groupRef = useRef<THREE.Group>(null);
 
   const N = 300;
   const gData = [...Array(N)].map(() => ({
@@ -62,9 +61,9 @@ export const Globe = () => {
           position={[100, 20, 500]}
           castShadow
         />
-        <group ref={groupRef}>
-          <threeGlobe ref={globeRef} />
-        </group>
+
+        <threeGlobe ref={globeRef} />
+
         <OrbitControls autoRotate enableZoom={false} />
       </Canvas>
     </div>
