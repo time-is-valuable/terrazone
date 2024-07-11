@@ -1,12 +1,27 @@
 import { create } from 'zustand';
-import { type User } from '~/appwrite/mock-employees';
+import { getEmployees, type Employee } from '~/appwrite/get-employees';
+import { timezones } from '~/lib/timezones';
 
 type UserState = {
-  activeUser: User | null;
-  setActiveUser: (job: User) => void;
+  activeUser: Employee | null;
+  setActiveUser: (employee_id: string) => void;
+  activeTimezone: { lat: number; long: number };
+  setActiveTimezone: () => void;
 };
 
-export const useUserStore = create<UserState>((set) => ({
+export const useUserStore = create<UserState>((set, get) => ({
   activeUser: null,
-  setActiveUser: (user) => set({ activeUser: user }),
+  setActiveUser: async (employee_id) => {
+    const employees = await getEmployees();
+    const user = employees!.find((employee) => employee.id === employee_id);
+    set({ activeUser: user });
+  },
+  activeTimezone: {
+    lat: 34.052234,
+    long: -118.243685,
+  },
+  setActiveTimezone: () => {
+    const tz = timezones.find((tz) => tz.value === get().activeUser?.timezone);
+    set({ activeTimezone: { lat: tz!.lat, long: tz!.long } });
+  },
 }));

@@ -3,7 +3,7 @@ import '~/styles/global.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { ThemeProvider } from '~/components/ThemeProvider';
+import { ThemeProvider } from '~/components/theme-provider';
 import { cn } from '~/lib/utils';
 
 const Aeonik = localFont({
@@ -62,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'text-white font-sans bg-[url(/images/background1.png)] bg-no-repeat bg-cover',

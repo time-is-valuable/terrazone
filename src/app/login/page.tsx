@@ -1,6 +1,6 @@
-import LoginForm from '~/components/LoginForm';
+import LoginForm from '~/components/login-form';
 
-export default function Register() {
+export default function Login() {
   return (
     <form className="flex justify-center items-center min-h-screen">
       <LoginForm />

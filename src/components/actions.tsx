@@ -12,12 +12,19 @@ export const Actions = () => {
 
   if (!activeUser) return;
 
+  const workHours = Object.values(JSON.parse(activeUser.times)).slice(
+    0,
+    2
+  ) as string[];
+
+  const workDays = Object.entries(JSON.parse(activeUser.times)).slice(2);
+
   return (
-    <div className="fixed animate-fade-in flex justify-between items-center border bottom-10 min-h-20 px-4 py-6 bg-[#1a1a1a] border-[#2D2D31] shadow-xl shadow-black/30 max-w-5xl w-full rounded-lg">
+    <div className="fixed animate-fade-in flex gap-8 justify-between items-center border bottom-10 min-h-20 px-8 py-6 bg-[#1a1a1a] border-[#2D2D31] shadow-xl shadow-black/30 max-w-5xl w-full rounded-lg">
       <div>
-        <h3 className="text-2xl">{activeUser.employee_name}</h3>
+        <h3 className="text-2xl">{activeUser.name}</h3>
         <h4 className="text-white/50 text-sm">
-          {activeUser.title} • <span>{activeUser.location}</span>
+          <span>{activeUser.location}</span>
         </h4>
       </div>
       <div className="flex gap-16">
@@ -36,19 +43,21 @@ export const Actions = () => {
         <div className="flex flex-col gap-2">
           <div className="text-white/50 text-sm">Work hours ({timezone})</div>
 
-          <span className="text-2xl text-white">{activeUser.workHours}</span>
+          <span className="text-2xl text-white">
+            {workHours[0]} — {workHours[1]}
+          </span>
         </div>
         <div className="flex flex-col gap-2">
           <div className="text-white/50 text-sm">Work days</div>
           <div className="flex gap-2">
-            {Object.entries(activeUser.times).map(([day, { isWorking }]) => (
+            {workDays.map(([day, isWorking], i) => (
               <div
-                key={day}
+                key={i}
                 className={cn(
                   'uppercase bg-white/30 border border-brand rounded-md font-medium text-sm size-6 flex items-center justify-center',
                   {
                     'opacity-100': isWorking,
-                    'opacity-75': !isWorking,
+                    'opacity-50': !isWorking,
                   }
                 )}
               >
