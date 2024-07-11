@@ -12,7 +12,7 @@ import {
 import { useUserStore } from '~/state/user-store';
 import { useRouter } from 'next/navigation';
 import { SearchEmployees } from './search-employees';
-import { Employee } from '~/appwrite/mock-employees';
+import { Employee } from '~/appwrite/get-employees';
 
 export const Header = ({ employees }: { employees: Employee[] }) => {
   const router = useRouter();

@@ -3,14 +3,25 @@
 import createGlobe, { Marker } from 'cobe';
 import { useEffect, useRef } from 'react';
 import { useSpring } from 'react-spring';
-import { Employee } from '~/appwrite/mock-employees';
+import { Employee } from '~/appwrite/get-employees';
+import { timezones } from '~/lib/timezones';
 import { useUserStore } from '~/state/user-store';
 
-export const Cobe = () => {
+export const Cobe = ({ employees }: { employees: Employee[] }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef(0);
-  const { activeTimezone, employeeTimezones } = useUserStore();
+  const { activeTimezone } = useUserStore();
+
+  const employeeTimezones = employees!
+    .reduce((acc, employee) => {
+      acc.push(employee.timezone);
+      return acc;
+    }, [] as string[])
+    .map((tz) => {
+      const timezone = timezones.find((timezone) => timezone.value === tz);
+      return [timezone!.lat, timezone!.long];
+    });
 
   const [{ r }, api] = useSpring(() => ({
     r: 0,
@@ -67,7 +78,7 @@ export const Cobe = () => {
         return {
           location,
           size: 0.05,
-        } as Marker;
+        } as unknown as Marker;
       }),
       onRender: (state) => {
         state.phi = r.get();

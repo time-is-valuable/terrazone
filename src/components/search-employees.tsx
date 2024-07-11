@@ -23,8 +23,8 @@ export const SearchEmployees = ({ employees }: { employees: Employee[] }) => {
         </SelectTrigger>
         <SelectContent>
           {employees.map((employee) => (
-            <SelectItem key={employee.employee_id} value={employee.employee_id}>
-              {employee.employee_name}
+            <SelectItem key={employee.id} value={employee.id}>
+              {employee.name}
             </SelectItem>
           ))}
         </SelectContent>
