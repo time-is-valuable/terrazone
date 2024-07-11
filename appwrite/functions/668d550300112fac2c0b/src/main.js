@@ -2,7 +2,7 @@ import {Permission, Query, Role} from 'node-appwrite';
 import AppwriteClient from "./shared/appwriteClient.js";
 
 export default async ({ req, res, log, error }) => {
-    AppwriteClient.setClient(req)
+    AppwriteClient.setClient()
 
     // Allowing all origins, as the function is for logged-in users only.
     const headers = { 'Access-Control-Allow-Origin': '*' };

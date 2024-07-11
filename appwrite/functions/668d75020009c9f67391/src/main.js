@@ -6,7 +6,7 @@ export default async ({ req, res, log, error }) => {
     if (req.headers['x-appwrite-trigger'] !== 'event') {
         return res.json({});
     }
-    AppwriteClient.setClient(req);
+    AppwriteClient.setClient();
 
     const user = req.bodyJson;
 
