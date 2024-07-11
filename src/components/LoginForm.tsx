@@ -11,7 +11,7 @@ import {
 } from './ui/card';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import { loginUser } from '~/appwrite/authAPIFunc';
+import { LoginUser } from '~/appwrite/authAPIFunc';
 
 export default function LoginForm() {
   const [email, setEmail] = useState<string>('');

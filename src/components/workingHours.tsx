@@ -4,10 +4,8 @@ import {
   CardContent,
   CardTitle,
   CardHeader,
-  CardFooter,
 } from "./ui/card";
 import { Button } from "./ui/button";
-import Link from "next/link";
 import { Checkbox } from "./ui/checkbox"
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -19,26 +17,26 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Switch } from "./ui/switch";
-import { CreateEmployeeData } from "~/appwrite/employeeAPIFunc";
 import { useState } from "react";
 import { daysOfWeek } from "~/static/daysOfWeek";
 import { timezones, ITimezone } from "~/static/timezoneCoordinate";
+import { CreateEmployeeData, UpdateEmployeeData, ListEmployeeData, UploadImage } from "../appwrite/employeeAPIFunc";
+import { GetAccount } from "~/appwrite/authAPIFunc";
 
 export default function WorkingHours() {
 
 const [timezone, setTimeZone] = useState<string>("");
 const [times, setTimes] = useState<string>("");
-const [name, setName] = useState<string>("");
-
-function saveInput(){
-    CreateEmployeeData({data: {employee_id: '', location: '', photo_id: '', times: times, timezone:timezone, employee_name: name, }});
-}
 
 const timeZoneOptions = timezones.map((time:ITimezone)=>{
   return(
     <SelectItem key={time.timezone} value={time.timezone}>{time.timezone} {time.greenWichTime}</SelectItem>
   )
 });
+
+function saveInput(){
+  
+}
 
 const weeklyCheckbox = daysOfWeek.map((day:string)=>{
   return(

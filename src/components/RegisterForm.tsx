@@ -11,7 +11,7 @@ import {
 } from './ui/card';
 import { Button } from './ui/button';
 import Link from 'next/link';
-import { registerUser } from '~/appwrite/authAPIFunc';
+import { RegisterUser } from '~/appwrite/authAPIFunc';
 
 export default function RegisterForm() {
   const [name, setName] = useState<string>('');
@@ -75,7 +75,6 @@ export default function RegisterForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
-      <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
         <Button
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
@@ -88,7 +87,6 @@ export default function RegisterForm() {
         </Button>
         <span className="font-normal text-[0.875rem]">
           Already have an account?
-          <Button className="p-0 ml-[.4rem]" variant="link">
           <Button className="p-0 ml-[.4rem]" variant="link">
             <Link href="/login">Login</Link>
           </Button>
