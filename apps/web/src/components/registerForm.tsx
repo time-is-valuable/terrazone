@@ -11,9 +11,9 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { registerUser } from "~/appwrite/authAPIFunc";
+import { RegisterUser } from "~/appwrite/authAPIFunc";
 
-export default function registerForm() {
+export default function RegisterForm() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -79,7 +79,7 @@ export default function registerForm() {
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
             e.preventDefault();
-            registerUser({ name: name, email: email, password: password, redirectURL: "/" });
+            RegisterUser({ name: name, email: email, password: password, redirectURL: "/" });
           }}
         >
           Sign Up

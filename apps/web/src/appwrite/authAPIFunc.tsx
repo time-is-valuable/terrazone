@@ -1,7 +1,7 @@
 import { account, ID } from "./config";
 import { redirect } from 'next/navigation'
 
-export async function registerUser({
+export async function RegisterUser({
   name,
   email,
   password,
@@ -15,13 +15,13 @@ export async function registerUser({
   try {
     await account.create(ID.unique(), email, password, name);
 
-    await loginUser({ email: email, password: password, redirectURL: redirectURL });
+    await LoginUser({ email: email, password: password, redirectURL: redirectURL });
   } catch (err) {
     console.error(err);
   }
 }
 
-export async function loginUser({
+export async function LoginUser({
   email,
   password,
   redirectURL
@@ -43,7 +43,7 @@ export async function loginUser({
   }
 }
 
-export async function getAccount() {
+export async function GetAccount() {
   try {
     return await account.get();
   } catch (err) {
@@ -51,7 +51,7 @@ export async function getAccount() {
   }
 }
 
-export async function logout({redirectURL}:{redirectURL: string}) {
+export async function Logout({redirectURL}:{redirectURL: string}) {
   try {
     const logout = await account.deleteSessions();
 
