@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import localFont from 'next/font/local';
-
 import '~/styles/global.css';
 import '@terrazone/ui/styles.css';
+
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+
 import { classNames } from '@terrazone/utils';
+import { ThemeProvider } from '~/components/themeProvider';
 
 const Aeonik = localFont({
   src: [
@@ -64,9 +65,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={classNames('text-white font-sans', Aeonik.variable)}
+      className={classNames(
+        'text-white font-sans bg-[url("../../../../assets/background1.png")] bg-no-repeat bg-cover',
+        Aeonik.variable
+      )}
     >
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
