@@ -1,6 +1,6 @@
 # Terrazone
 
-![Terrazone](assets/terrazone.png)
+![Terrazone](public/images/terrazone.png)
 Get a hold of your college work time and whereabouts with ease.
 
 ## ⚡ Features
