@@ -75,10 +75,12 @@ export default function RegisterForm() {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
+      <CardFooter className="flex flex-col items-center justify-between min-h-[7.5rem]">
         <Button
           className="text-[0.875rem] w-full bg-transparent text-white border-[.1rem] border-[#2D2D31]"
           onClick={(e) => {
             e.preventDefault();
+            RegisterUser({ name: name, email: email, password: password, redirectURL: "/" });
             RegisterUser({ name: name, email: email, password: password, redirectURL: "/" });
           }}
         >
@@ -86,6 +88,7 @@ export default function RegisterForm() {
         </Button>
         <span className="font-normal text-[0.875rem]">
           Already have an account?
+          <Button className="p-0 ml-[.4rem]" variant="link">
           <Button className="p-0 ml-[.4rem]" variant="link">
             <Link href="/login">Login</Link>
           </Button>
