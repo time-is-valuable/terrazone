@@ -5,6 +5,7 @@ import { timezones } from '~/lib/timezones';
 type UserState = {
   activeUser: Employee | null;
   setActiveUser: (employee_id: string) => void;
+  toggleActiveUser: () => void;
   activeTimezone: { lat: number; long: number };
   setActiveTimezone: () => void;
 };
@@ -16,6 +17,7 @@ export const useUserStore = create<UserState>((set, get) => ({
     const user = employees!.find((employee) => employee.id === employee_id);
     set({ activeUser: user! });
   },
+  toggleActiveUser: () => set({ activeUser: null }),
   activeTimezone: {
     lat: 34.052234,
     long: -118.243685,

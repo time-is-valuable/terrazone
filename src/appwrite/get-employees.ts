@@ -53,7 +53,6 @@ export const getEmployees = async () => {
   try {
     const data = await database.listDocuments('terrazone', 'employees');
 
-    console.log(JSON.stringify(data.documents, null, 2));
     return employeesSchema.parse(data.documents);
   } catch (err) {
     console.error(err);
