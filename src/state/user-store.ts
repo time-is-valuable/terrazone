@@ -21,7 +21,6 @@ export const useUserStore = create<UserState>((set, get) => ({
     long: -118.243685,
   },
   setActiveTimezone: () => {
-    const activeUser = get().activeUser;
     const tz = timezones.find((tz) => tz.value === get().activeUser?.timezone);
     set({ activeTimezone: { lat: tz?.lat ?? 0, long: tz?.long ?? 0 } });
   },

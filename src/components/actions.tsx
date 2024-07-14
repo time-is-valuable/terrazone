@@ -6,18 +6,15 @@ import { cn } from '~/lib/utils';
 import { useUserStore } from '~/state/user-store';
 
 export const Actions = () => {
-  const { activeUser } = useUserStore();
+  const { activeUser, setActiveUser } = useUserStore();
 
   const { timezone, localTime } = useLocalTime(activeUser?.timezone);
 
   if (!activeUser) return;
 
-  const workHours = Object.values(JSON.parse(activeUser.times)).slice(
-    0,
-    2
-  ) as string[];
+  const workHours = Object.values(activeUser.times).slice(0, 2) as string[];
 
-  const workDays = Object.entries(JSON.parse(activeUser.times)).slice(2);
+  const workDays = Object.entries(activeUser.times).slice(2);
 
   return (
     <div className="fixed animate-fade-in flex gap-8 justify-between items-center border bottom-10 min-h-20 px-8 py-6 bg-[#1a1a1a] border-[#2D2D31] shadow-xl shadow-black/30 max-w-5xl w-full rounded-lg">
